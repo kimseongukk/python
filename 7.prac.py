@@ -1,7 +1,7 @@
 import streamlit as st
 import altair as alt
 import pandas as pd
-import plotly.express as px
+# import plotly.express as px
 
 st.title('종합 실습')
 st.header('_2021 서울교통공사 지하철 월별 하차 인원_')
