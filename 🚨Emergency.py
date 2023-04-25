@@ -9,7 +9,7 @@ from streamlit_folium import st_folium
 import folium
 import branca
 from geopy.geocoders import Nominatim
-import ssl
+#import ssl
 from urllib.request import urlopen
 import plotly.express as px
 import pickle
