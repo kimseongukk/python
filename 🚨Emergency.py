@@ -23,7 +23,7 @@ import time
 import urllib.request
 
 
-url = "https://github.com/euknow/Data/raw/main/Lightmodel"
+url = "https://github.com/kimsengukk/python/model.pickle"
 response = requests.get(url, stream=True)
 lightgbm = pickle.load(response.raw)
 
