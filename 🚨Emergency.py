@@ -23,7 +23,7 @@ import time
 import urllib.request
 
 
-url = "https://github.com/kimsengukk/python/model.pickle"
+url = "https://github.com/kimsengukk/python/raw/main/model.pickle"
 response = requests.get(url, stream=True)
 lightgbm = pickle.load(response.raw)
 
@@ -76,8 +76,8 @@ def pred_dis(df, model):
 # 리턴 변수(거리, 거리구분) : distance_df
 def find_hospital(special_m, lati, long):
     
-    #context=ssl.create_default_context()
-    #context.set_ciphers("DEFAULT")
+    context=ssl.create_default_context()
+    context.set_ciphers("DEFAULT")
 
     key = "jbMloHktKBRTicjzz1JUQVaJ1j2MY%2Fyg2J764zZGrnn8i4D7q8ftgliJcERxZt8O8eyqnbv8vmTxdRmPUCNAbA%3D%3D"
 
@@ -89,14 +89,14 @@ def find_hospital(special_m, lati, long):
 
     # 응급실 실시간 가용병상 조회
     url_realtime = 'https://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire'+'?serviceKey=' + key + '&STAGE1=' + city + '&pageNo=1&numOfRows=1000'
-    #result = urlopen(url_realtime, context=context)
-    emrRealtime = pd.read_xml(url_realtime, xpath='.//item')
+    result = urlopen(url_realtime, context=context)
+    emrRealtime = pd.read_xml(result, xpath='.//item')
     solution_df = pd.merge(solution_df, emrRealtime[['hpid', 'hvec', 'hvoc']], on="hpid", how="inner")
 
     # 응급실 실시간 중증질환 수용 가능 여부
     url_acpt = 'https://apis.data.go.kr/B552657/ErmctInfoInqireService/getSrsillDissAceptncPosblInfoInqire' + '?serviceKey=' + key + '&STAGE1=' + city + '&pageNo=1&numOfRows=100'
-    #result = urlopen(url_acpt, context=context)
-    emrAcpt = pd.read_xml(url_acpt, xpath='.//item')
+    result = urlopen(url_acpt, context=context)
+    emrAcpt = pd.read_xml(result, xpath='.//item')
     emrAcpt = emrAcpt.rename(columns={"dutyName":"hpid"})
     solution_df = pd.merge(solution_df,
                            emrAcpt[['hpid', 'MKioskTy1', 'MKioskTy2', 'MKioskTy3', 'MKioskTy4', 'MKioskTy5', 'MKioskTy7',
