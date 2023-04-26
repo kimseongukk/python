@@ -9,7 +9,7 @@ from streamlit_folium import st_folium
 import folium
 import branca
 from geopy.geocoders import Nominatim
-#import ssl
+import ssl
 from urllib.request import urlopen
 import plotly.express as px
 import pickle
@@ -23,12 +23,12 @@ import time
 import urllib.request
 
 
-url = "https://github.com/kimsengukk/python/raw/main/model.pickle"
+url = "https://github.com/kimseongukk/python/raw/main/model.pickle"
 response = requests.get(url, stream=True)
 lightgbm = pickle.load(response.raw)
 
 def geocoding(address):
-    geolocator = Nominatim(user_agent='South korea', timeout=None)
+    geolocator = Nominatim(user_agent='eunho')
     location = geolocator.geocode(address)
     lati = location.latitude
     long = location.longitude
