@@ -17,3 +17,4 @@ googlemaps==4.10.0
 polyline==2.0.0
 cloudpickle==2.0.0
 pyOpenSSL==22.0.0
+scikit-learn==1.2.1
